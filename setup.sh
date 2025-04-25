@@ -7,6 +7,7 @@ git clone https://github.com/comfyanonymous/ComfyUI
 # Text encoders to ComfyUI/models/text_encoders
 # Transformer to ComfyUI/models/diffusion_models
 # Vae to ComfyUI/models/vae
+# https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged
 
 # custom_nodes
 cd custom_nodes
