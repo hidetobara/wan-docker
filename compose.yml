@@ -1,20 +1,15 @@
-version: '3.9'
 
 services:
   wan:
     build: ./
-    shm_size: '2gb'
+    shm_size: '4gb'
     command: python ComfyUI/main.py --listen --port 8188
     volumes:
       - ./models/:/app/ComfyUI/models/
       - ./output/:/app/ComfyUI/output/
       - ./custom_nodes/:/app/ComfyUI/custom_nodes/
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
     ports:
       - "8188:8188"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+    runtime: nvidia

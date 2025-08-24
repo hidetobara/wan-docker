@@ -1,6 +1,6 @@
 #FROM pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
-FROM pytorch/pytorch:2.5.1-cuda11.8-cudnn9-runtime
-ENV DEBIAN_FRONTEND noninteractive
+FROM pytorch/pytorch:2.4.1-cuda11.8-cudnn9-runtime
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -y && \
 	apt-get install -y curl python3-pip git vim less wget libgl1-mesa-dev libglib2.0-0 && \
@@ -9,10 +9,11 @@ RUN apt-get update -y && \
 
 WORKDIR /app
 RUN pip3 install torchsde \
-    comfyui-frontend-package==1.16.9 \
-    comfyui-workflow-templates==0.1.3 \
+    comfyui-frontend-package>=1.16.9 \
+    comfyui-workflow-templates>=0.1.3 \
+    comfyui-embedded-docs \
     torchsde \
-    numpy>=1.25.0 \
+    "numpy>=1.25.0,<2" \
     einops \
     transformers>=4.28.1 \
     tokenizers>=0.13.3 \
@@ -26,6 +27,7 @@ RUN pip3 install torchsde \
     tqdm \
     psutil \
     opencv-python kornia spandrel \
-    ftfy accelerate diffusers protobuf imageio_ffmpeg av>=14.1.0 sageattention matplotlib
+    ftfy accelerate diffusers protobuf imageio_ffmpeg av>=14.1.0 sageattention matplotlib \
+    gguf onnx onnxruntime alembic pydantic pydantic_settings
 
 COPY ComfyUI /app/ComfyUI
